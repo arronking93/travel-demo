@@ -1,11 +1,16 @@
 <template>
   <div>
-    Hello world!
+    <home-header></home-header>
   </div>
 </template>
 
 <script>
-export default {};
+import HomeHeader from "./components/Header";
+export default {
+  components: {
+    HomeHeader
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>
