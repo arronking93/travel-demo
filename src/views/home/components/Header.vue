@@ -23,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/styles/varibles";
 // 或者
-// @import "~@/assets/styles/varibles";
+// @import "@/assets/styles/varibles";
 .header {
   display: flex;
   height: 0.86rem;
