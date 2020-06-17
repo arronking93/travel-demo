@@ -1,10 +1,10 @@
 <template>
   <div>
-    <home-header></home-header>
-    <home-swiper></home-swiper>
-    <home-icons></home-icons>
-    <home-recommend></home-recommend>
-    <home-weekend></home-weekend>
+    <home-header :city="city"></home-header>
+    <home-swiper :swiperList="swiperList"></home-swiper>
+    <home-icons :iconList="iconList"></home-icons>
+    <home-recommend :hotList="hotList"></home-recommend>
+    <home-weekend :weekendList="weekendList"></home-weekend>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import HomeSwiper from "./components/Swiper";
 import HomeIcons from "./components/Icons";
 import HomeRecommend from "./components/Recommend";
 import HomeWeekend from "./components/Weekend";
+import axios from "axios";
 export default {
   components: {
     HomeHeader,
@@ -21,6 +22,41 @@ export default {
     HomeIcons,
     HomeRecommend,
     HomeWeekend
+  },
+  data() {
+    return {
+      city: "",
+      swiperList: [],
+      iconList: [],
+      hotList: [],
+      weekendList: []
+    };
+  },
+  methods: {
+    getData() {
+      axios
+        .get(`${process.env.VUE_APP_BASE_API}/public/mock/index.json`)
+        .then(this.successHandler);
+    },
+    successHandler(res) {
+      if (res.status === 200) {
+        console.log("get data sucessed");
+        const data = res.data;
+        if (data.ret) {
+          const info = data.data;
+          this.city = info.city;
+          this.swiperList = info.swiperList;
+          this.iconList = info.iconList;
+          this.hotList = info.hotList;
+          this.weekendList = info.weekendList;
+        }
+      } else {
+        console.log("get data failed");
+      }
+    }
+  },
+  created() {
+    this.getData();
   }
 };
 </script>

@@ -5,18 +5,25 @@
     </div>
     <div class="header-input" placeholder="">
       <span class="iconfont">&#xe633;</span>
-      输入城市/景点/游玩/主题
+      <input
+        class="header-input-content"
+        type="text"
+        placeholder="输入城市/景点/游玩/主题"
+      />
     </div>
-    <div class="header-right">
-      城市
+    <router-link to="/city" tag="div" class="header-right">
+      {{ city }}
       <span class="iconfont icon-menu">&#xe615;</span>
-    </div>
+    </router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HomeHeader"
+  name: "HomeHeader",
+  props: {
+    city: String
+  }
 };
 </script>
 
@@ -26,8 +33,8 @@ export default {
 // @import "@/assets/styles/varibles";
 .header {
   display: flex;
-  height: 0.86rem;
-  line-height: 0.86rem;
+  height: $headerHeight;
+  line-height: $headerHeight;
   background-color: $myBgColor;
   color: #fff;
   .header-left {
@@ -46,7 +53,11 @@ export default {
     line-height: 0.62rem;
     margin: 0.12rem 0.2rem 0.12rem 0;
     color: #ccc;
-    padding-left: 0.2rem;
+    padding: 0 0.2rem;
+    display: flex;
+    .header-input-content {
+      flex: 1;
+    }
   }
   .header-right {
     width: 1.24rem;

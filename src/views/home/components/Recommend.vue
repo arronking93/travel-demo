@@ -2,15 +2,11 @@
   <div class="recommend">
     <div class="title">热门推荐</div>
     <ul>
-      <li
-        class="item border-bottom"
-        v-for="item in recommendList"
-        :key="item.id"
-      >
+      <li class="item border-bottom" v-for="item in hotList" :key="item.id">
         <img :src="item.imgUrl" :alt="item.title" class="item-img" />
         <div class="item-info">
           <div class="item-title">{{ item.title }}</div>
-          <div class="item-desc">{{ item.desc }}</div>
+          <div class="item-desc">{{ item.price }}</div>
           <div class="item-button">查看详情</div>
         </div>
       </li>
@@ -21,33 +17,11 @@
 <script>
 export default {
   name: "HomeRecommend",
+  props: {
+    hotList: Array
+  },
   data() {
-    return {
-      recommendList: [
-        {
-          id: 1,
-          imgUrl:
-            "//img1.qunarzz.com/sight/p0/1701/6c/6c5e1f8fa365adada3.img.png_200x200_d4ece7be.png",
-          title: "宁波方特东方神话",
-          desc: "宁波方特东方神话，浪漫的东方之旅"
-        },
-        {
-          id: 2,
-          imgUrl:
-            "//img1.qunarzz.com/sight/p0/1701/6c/6c5e1f8fa365adada3.img.png_200x200_d4ece7be.png",
-          title: "宁波方特东方神话",
-          desc: "宁波方特东方神话，浪漫的东方之旅"
-        },
-        {
-          id: 3,
-          imgUrl:
-            "//img1.qunarzz.com/sight/p0/1701/6c/6c5e1f8fa365adada3.img.png_200x200_d4ece7be.png",
-          title:
-            "宁波方特东方神话宁波方特东方神话宁波方特东方神话宁波方特东方神话宁波方特东方神话",
-          desc: "宁波方特东方神话，浪漫的东方之旅宁波方特东方神话，浪漫的东..."
-        }
-      ]
-    };
+    return {};
   }
 };
 </script>

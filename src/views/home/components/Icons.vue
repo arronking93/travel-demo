@@ -6,7 +6,7 @@
           <div class="icon-img">
             <img :src="item.imgUrl" alt="" class="icon-img-content" />
           </div>
-          <div class="icon-name">{{ item.name }}</div>
+          <div class="icon-name">{{ item.title }}</div>
         </div>
       </swiper-slide>
     </swiper>
@@ -16,69 +16,20 @@
 <script>
 export default {
   name: "HomeIcons",
+  props: {
+    iconList: Array
+  },
   data() {
     return {
-      listData: [
-        {
-          id: 1,
-          name: "景点门票景点门票景点门票景点门票景点门票",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 2,
-          name: "滑雪季",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 3,
-          name: "泡温泉",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 4,
-          name: "动植物园",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 5,
-          name: "一日游",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 6,
-          name: "必游榜单",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 7,
-          name: "自然风光",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 8,
-          name: "全部",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 9,
-          name: "自然风光2",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        },
-        {
-          id: 10,
-          name: "全部2",
-          imgUrl: "//img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"
-        }
-      ],
       swiperOption: {
-        pagination: ".swiper-pagination"
+        autoplay: false
       }
     };
   },
   computed: {
     pagesData() {
       const list = [];
-      this.listData.forEach((item, index) => {
+      this.iconList.forEach((item, index) => {
         const i = Math.floor(index / 8);
         if (typeof list[i] === "undefined") {
           list[i] = [];
