@@ -75,6 +75,7 @@
 <script>
 import BScroll from "better-scroll";
 export default {
+  name: "CityList",
   data() {
     return {
       scroll: null

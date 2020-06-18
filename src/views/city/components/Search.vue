@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "HomeHeader",
+  name: "CitySearch",
   props: {
     city: String
   }
