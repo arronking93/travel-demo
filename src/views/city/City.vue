@@ -1,18 +1,21 @@
 <template>
   <div>
-    <home-header></home-header>
-    <home-search></home-search>
+    <city-header></city-header>
+    <city-search></city-search>
+    <city-list></city-list>
   </div>
 </template>
 
 <script>
-import HomeHeader from "./components/Header";
-import HomeSearch from "./components/Search";
+import CityHeader from "./components/Header";
+import CitySearch from "./components/Search";
+import CityList from "./components/List";
 // import axios from "axios";
 export default {
   components: {
-    HomeHeader,
-    HomeSearch
+    CityHeader,
+    CitySearch,
+    CityList
   }
 };
 </script>
