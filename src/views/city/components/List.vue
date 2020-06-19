@@ -12,60 +12,25 @@
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-box">
-            <div class="button-item">杭州</div>
-          </div>
-          <div class="button-box">
-            <div class="button-item">北京</div>
-          </div>
-          <div class="button-box">
-            <div class="button-item">上海</div>
-          </div>
-          <div class="button-box">
-            <div class="button-item">广州</div>
-          </div>
-          <div class="button-box">
-            <div class="button-item">苏州</div>
+          <div class="button-box" v-for="item in hotCitiesList" :key="item.id">
+            <div class="button-item">{{ item.name }}</div>
           </div>
         </div>
       </div>
-      <div class="area border-topbottom">
-        <div class="title">A</div>
+      <div
+        class="area border-topbottom"
+        v-for="(items, key) in citiesList"
+        :key="key"
+      >
+        <div class="title">{{ key }}</div>
         <div class="addr-list">
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-        </div>
-      </div>
-      <div class="area border-topbottom">
-        <div class="title">A</div>
-        <div class="addr-list">
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-        </div>
-      </div>
-      <div class="area border-topbottom">
-        <div class="title">A</div>
-        <div class="addr-list">
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
-          <div class="addr-item border-bottom">安庆</div>
+          <div
+            class="addr-item border-bottom"
+            v-for="item in items"
+            :key="item.id"
+          >
+            {{ item.name }}
+          </div>
         </div>
       </div>
     </div>
@@ -76,6 +41,10 @@
 import BScroll from "better-scroll";
 export default {
   name: "CityList",
+  props: {
+    hotCitiesList: Array,
+    citiesList: Object
+  },
   data() {
     return {
       scroll: null

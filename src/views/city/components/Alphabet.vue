@@ -1,19 +1,26 @@
 <template>
   <ul class="alph-list">
-    <li class="item">A</li>
-    <li class="item">B</li>
-    <li class="item">A</li>
-    <li class="item">B</li>
-    <li class="item">A</li>
-    <li class="item">B</li>
+    <li class="item" v-for="item in letters" :key="item">{{ item }}</li>
   </ul>
 </template>
 
 <script>
 export default {
-  name: "City",
+  name: "CityAlphabet",
   props: {
-    city: String
+    citiesList: Object
+  },
+  computed: {
+    letters() {
+      // const letters = [];
+      // for (let i in this.citiesList) {
+      //   if (this.citiesList.hasOwnProperty(i)) {
+      //     this.letters.push(i);
+      //   }
+      // }
+      // return letters;
+      return Object.keys(this.citiesList);
+    }
   }
 };
 </script>
