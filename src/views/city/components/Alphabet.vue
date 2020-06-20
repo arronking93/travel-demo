@@ -1,6 +1,17 @@
 <template>
   <ul class="alph-list">
-    <li class="item" v-for="item in letters" :key="item">{{ item }}</li>
+    <li
+      class="item"
+      v-for="item in letters"
+      :key="item"
+      :ref="item"
+      @click="alphaClickHandler"
+      @touchstart="alphaTouchStartHandler"
+      @touchmove="alphaTouchMoveHandler"
+      @touchend="alphaTouchEndHandler"
+    >
+      {{ item }}
+    </li>
   </ul>
 </template>
 
@@ -8,7 +19,15 @@
 export default {
   name: "CityAlphabet",
   props: {
-    citiesList: Object
+    citiesList: Object,
+    cityHeaderHeight: Number
+  },
+  data() {
+    return {
+      touchStatus: false,
+      touchStartY: null,
+      alphaHeight: null
+    };
   },
   computed: {
     letters() {
@@ -21,6 +40,31 @@ export default {
       // return letters;
       return Object.keys(this.citiesList);
     }
+  },
+  methods: {
+    alphaClickHandler(e) {
+      this.$emit("alphaChange", e.target.innerHTML.trim());
+    },
+    alphaTouchStartHandler() {
+      this.touchStatus = true;
+      // this.touchStartY = e.target.offsetTop;
+    },
+    alphaTouchMoveHandler(e) {
+      if (!this.touchStatus) {
+        return;
+      }
+      const touchDis = e.touches[0].clientY - this.touchStartY;
+      const index = Math.floor(touchDis / this.alphaHeight);
+      this.$emit("alphaChange", this.letters[index]);
+    },
+    alphaTouchEndHandler() {
+      this.touchStatus = false;
+    }
+  },
+  updated() {
+    const el = this.$refs["A"][0];
+    this.touchStartY = el.offsetTop + this.cityHeaderHeight;
+    this.alphaHeight = el.offsetHeight;
   }
 };
 </script>

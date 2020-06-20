@@ -1,12 +1,17 @@
 <template>
-  <div>
+  <div class="city-page" ref="cityPage">
     <city-header></city-header>
     <city-search></city-search>
     <city-list
       :hotCitiesList="hotCitiesList"
       :citiesList="citiesList"
+      :curAlpha="curAlpha"
     ></city-list>
-    <city-alphabet :citiesList="citiesList"></city-alphabet>
+    <city-alphabet
+      :citiesList="citiesList"
+      :cityHeaderHeight="cityHeaderHeight"
+      @alphaChange="alphaChange"
+    ></city-alphabet>
   </div>
 </template>
 
@@ -26,7 +31,9 @@ export default {
   data() {
     return {
       hotCitiesList: [],
-      citiesList: {}
+      citiesList: {},
+      curAlpha: "",
+      cityHeaderHeight: -1
     };
   },
   methods: {
@@ -47,10 +54,16 @@ export default {
       } else {
         console.log("get data failed");
       }
+    },
+    alphaChange(data) {
+      this.curAlpha = data;
     }
   },
   created() {
     this.getData();
+  },
+  mounted() {
+    this.cityHeaderHeight = this.$refs.cityPage.clientHeight;
   }
 };
 </script>

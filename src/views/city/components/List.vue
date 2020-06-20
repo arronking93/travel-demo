@@ -21,6 +21,7 @@
         class="area border-topbottom"
         v-for="(items, key) in citiesList"
         :key="key"
+        :ref="key"
       >
         <div class="title">{{ key }}</div>
         <div class="addr-list">
@@ -43,12 +44,21 @@ export default {
   name: "CityList",
   props: {
     hotCitiesList: Array,
-    citiesList: Object
+    citiesList: Object,
+    curAlpha: String
   },
   data() {
     return {
       scroll: null
     };
+  },
+  watch: {
+    curAlpha(newVal) {
+      if (newVal) {
+        const el = this.$refs[newVal][0];
+        this.scroll.scrollToElement(el);
+      }
+    }
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.cityListContainer);
