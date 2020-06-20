@@ -1,14 +1,66 @@
 <template>
   <div class="search">
-    <input type="text" class="header-input" placeholder="输入城市或拼音" />
+    <input
+      type="text"
+      class="header-input"
+      placeholder="输入城市或拼音"
+      v-model="keyWord"
+    />
+    <div class="filter-content" v-show="keyWord" ref="searchList">
+      <ul class="filter-list">
+        <li
+          class="filter-item border-bottom"
+          v-for="item in filterCityList"
+          :key="item.id"
+        >
+          {{ item.name }}
+        </li>
+        <li class="filter-item border-bottom" v-show="hasNoData">
+          没有找到匹配数据
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
+import BScroll from "better-scroll";
 export default {
   name: "CitySearch",
   props: {
-    city: String
+    city: String,
+    citiesList: Object
+  },
+  data() {
+    return {
+      keyWord: "",
+      scroll: null
+    };
+  },
+  computed: {
+    filterCityList() {
+      const target = [];
+      if (!this.keyWord) {
+        return target;
+      }
+      Object.values(this.citiesList).forEach(group => {
+        group.forEach(item => {
+          if (
+            item.name.includes(this.keyWord) ||
+            item.spell.includes(this.keyWord)
+          ) {
+            target.push(item);
+          }
+        });
+      });
+      return target;
+    },
+    hasNoData() {
+      return !this.filterCityList.length;
+    }
+  },
+  mounted() {
+    this.scroll = new BScroll(this.$refs.searchList);
   }
 };
 </script>
@@ -32,6 +84,23 @@ export default {
     padding: 0 0.2rem;
     box-sizing: border-box;
     text-align: center;
+  }
+  .filter-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 1.58rem;
+    bottom: 0;
+    background: #eee;
+    z-index: 1;
+    overflow: hidden;
+    .filter-list {
+      background: #fff;
+      .filter-item {
+        line-height: 0.76rem;
+        text-indent: 0.2rem;
+      }
+    }
   }
 }
 </style>

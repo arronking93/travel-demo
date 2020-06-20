@@ -26,7 +26,8 @@ export default {
     return {
       touchStatus: false,
       touchStartY: null,
-      alphaHeight: null
+      alphaHeight: null,
+      touchTimer: null
     };
   },
   computed: {
@@ -53,9 +54,16 @@ export default {
       if (!this.touchStatus) {
         return;
       }
-      const touchDis = e.touches[0].clientY - this.touchStartY;
-      const index = Math.floor(touchDis / this.alphaHeight);
-      this.$emit("alphaChange", this.letters[index]);
+      if (this.touchTimer) {
+        clearTimeout(this.touchTimer);
+      }
+      this.touchTimer = setTimeout(() => {
+        const touchDis = e.touches[0].clientY - this.touchStartY;
+        const index = Math.floor(touchDis / this.alphaHeight);
+        if (index >= 0 && index < this.letters.length) {
+          this.$emit("alphaChange", this.letters[index]);
+        }
+      }, 16);
     },
     alphaTouchEndHandler() {
       this.touchStatus = false;
