@@ -12,6 +12,7 @@
           class="filter-item border-bottom"
           v-for="item in filterCityList"
           :key="item.id"
+          @click="handleCityClick(item.name)"
         >
           {{ item.name }}
         </li>
@@ -25,6 +26,7 @@
 
 <script>
 import BScroll from "better-scroll";
+import { mapMutations } from "vuex";
 export default {
   name: "CitySearch",
   props: {
@@ -57,6 +59,13 @@ export default {
     },
     hasNoData() {
       return !this.filterCityList.length;
+    }
+  },
+  methods: {
+    ...mapMutations(["changeCurCity"]),
+    handleCityClick(city) {
+      this.changeCurCity(city);
+      this.$router.push("/");
     }
   },
   mounted() {

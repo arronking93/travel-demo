@@ -12,17 +12,18 @@
       />
     </div>
     <router-link to="/city" tag="div" class="header-right">
-      {{ city }}
+      {{ curCity }}
       <span class="iconfont icon-menu">&#xe615;</span>
     </router-link>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "HomeHeader",
-  props: {
-    city: String
+  computed: {
+    ...mapState(["curCity"])
   }
 };
 </script>
@@ -60,7 +61,8 @@ export default {
     }
   }
   .header-right {
-    width: 1.24rem;
+    min-width: 1.04rem;
+    padding: 0 0.1rem;
     .icon-menu {
       font-size: 0.24rem;
       margin-left: -0.04rem;
